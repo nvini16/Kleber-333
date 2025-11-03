@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aniversário do Inspetor Kleber</title>
+  <style>
+    body {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #ffefba 0%, #ffffff 50%, #ffd6a5 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    html {
+      height: 100%;
+    }
+
+    .card-container {
+      position: relative;
+      width: 400px;
+      height: 600px;
+      perspective: 1000px;
+    }
+
+    .card {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #ffb347 0%, #ffcc33 100%);
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-10px) rotateX(5deg);
+    }
+
+    .card-title {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #ffffff;
+      text-align: center;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      animation: titlePulse 2s ease-in-out infinite;
+    }
+
+    .card-name {
+      font-size: 2.8rem;
+      font-weight: bold;
+      color: #ff5733;
+      text-align: center;
+      margin: 20px 0;
+      text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+      animation: nameGlow 3s ease-in-out infinite;
+    }
+
+    .card-message {
+      font-size: 1.2rem;
+      color: #333;
+      text-align: center;
+      line-height: 1.6;
+      margin-top: 20px;
+      text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3);
+    }
+
+    .birthday-cake {
+      margin: 20px 0;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .birthday-cake:hover {
+      transform: scale(1.1);
+    }
+
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: #ff6b6b;
+      animation: confettiFall 3s linear infinite;
+    }
+
+    .confetti:nth-child(2n) { background: #4ecdc4; }
+    .confetti:nth-child(3n) { background: #45b7d1; }
+    .confetti:nth-child(4n) { background: #f9ca24; }
+    .confetti:nth-child(5n) { background: #6c5ce7; }
+
+    .balloon {
+      position: absolute;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .balloon:hover {
+      transform: scale(1.2);
+    }
+
+    .balloon-1 { top: 50px; left: 50px; animation: balloonFloat 4s ease-in-out infinite; }
+    .balloon-2 { top: 80px; right: 50px; animation: balloonFloat 4s ease-in-out infinite 1s; }
+    .balloon-3 { bottom: 100px; left: 30px; animation: balloonFloat 4s ease-in-out infinite 2s; }
+
+    .interactive-button {
+      background: linear-gradient(45deg, #ff6b6b, #feca57);
+      border: none;
+      padding: 15px 30px;
+      border-radius: 25px;
+      color: white;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 30px;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .interactive-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    @keyframes titlePulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    @keyframes nameGlow {
+      0%, 100% { text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4); }
+      50% { text-shadow: 3px 3px 20px rgba(255, 242, 0, 0.8); }
+    }
+
+    @keyframes confettiFall {
+      0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+
+    @keyframes balloonFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+
+    @keyframes cakeCandles {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+  </style>
+</head>
+<body>
+  <div class="card-container">
+    <div class="card" onclick="createConfetti()">
+
+      <!-- Balões decorativos -->
+      <svg class="balloon balloon-1" width="40" height="60" onclick="popBalloon(this)">
+        <ellipse cx="20" cy="35" rx="15" ry="20" fill="#ff6b6b"/>
+        <line x1="20" y1="55" x2="20" y2="60" stroke="#333" stroke-width="1"/>
+      </svg>
+          
+      <svg class="balloon balloon-2" width="40" height="60" onclick="popBalloon(this)">
+        <ellipse cx="20" cy="35" rx="15" ry="20" fill="#4ecdc4"/>
+        <line x1="20" y1="55" x2="20" y2="60" stroke="#333" stroke-width="1"/>
+      </svg>
+          
+      <svg class="balloon balloon-3" width="40" height="60" onclick="popBalloon(this)">
+        <ellipse cx="20" cy="35" rx="15" ry="20" fill="#f9ca24"/>
+        <line x1="20" y1="55" x2="20" y2="60" stroke="#333" stroke-width="1"/>
+      </svg>
+
+      <h1 class="card-title">🎉 Feliz Aniversário! 🎉</h1>
+      <div class="card-name">Inspetor Kleber</div>
+      <p class="card-message">Do Marlene, o melhor inspetor da escola! 🥳</p>
+
+      <!-- Bolo de aniversário -->
+      <svg class="birthday-cake" width="120" height="100" onclick="blowCandles(this)">
+        <rect x="20" y="60" width="80" height="30" fill="#8B4513" rx="5"/>
+        <rect x="25" y="50" width="70" height="20" fill="#DEB887" rx="3"/>
+        <rect x="30" y="40" width="60" height="15" fill="#F4A460" rx="2"/>
+
+        <!-- Velas -->
+        <rect x="40" y="25" width="3" height="15" fill="#FFD700"/>
+        <rect x="55" y="25" width="3" height="15" fill="#FFD700"/>
+        <rect x="70" y="25" width="3" height="15" fill="#FFD700"/>
+
+        <!-- Chamas -->
+        <ellipse class="candle-flame" cx="41.5" cy="22" rx="2" ry="4" fill="#FF4500" style="animation: cakeCandles 1s ease-in-out infinite;"/>
+        <ellipse class="candle-flame" cx="56.5" cy="22" rx="2" ry="4" fill="#FF4500" style="animation: cakeCandles 1s ease-in-out infinite 0.3s;"/>
+        <ellipse class="candle-flame" cx="71.5" cy="22" rx="2" ry="4" fill="#FF4500" style="animation: cakeCandles 1s ease-in-out infinite 0.6s;"/>
+      </svg>
+
+      <button class="interactive-button" onclick="showSurprise()">🎁 Clique para uma surpresa!</button>
+    </div>
+  </div>
+
+  <script>
+    function createConfetti() {
+      for (let i = 0; i < 50; i++) {
+        setTimeout(() => {
+          const confetti = document.createElement('div');
+          confetti.className = 'confetti';
+          confetti.style.left = Math.random() * 100 + '%';
+          confetti.style.animationDelay = Math.random() * 2 + 's';
+          confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+          confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+          document.body.appendChild(confetti);
+          setTimeout(() => confetti.remove(), 4000);
+        }, i * 50);
+      }
+    }
+
+    function popBalloon(balloon) {
+      balloon.style.transform = 'scale(0)';
+      balloon.style.opacity = '0';
+      const pop = document.createElement('div');
+      pop.innerHTML = '💥';
+      pop.style.position = 'absolute';
+      pop.style.fontSize = '2rem';
+      pop.style.left = balloon.style.left;
+      pop.style.top = balloon.style.top;
+      document.querySelector('.card').appendChild(pop);
+      setTimeout(() => { pop.remove(); balloon.style.transform = 'scale(1)'; balloon.style.opacity = '1'; }, 1000);
+    }
+
+    function blowCandles(cake) {
+      const flames = cake.querySelectorAll('.candle-flame');
+      flames.forEach((flame, i) => setTimeout(() => { flame.style.opacity = '0'; }, i * 200));
+      setTimeout(() => flames.forEach(f => f.style.opacity = '1'), 2000);
+      createConfetti();
+    }
+
+    function showSurprise() {
+      const messages = [
+        "🌟 Kleber, você é inspiração e respeito! 🌟",
+        "🎈 Marlene te admira, inspetor nota 1000! 🎈",
+        "✨ Parabéns, Kleber! Que venham mais vitórias! ✨",
+        "🎊 Hoje é o seu dia, o melhor inspetor do pedaço! 🎊"
+      ];
+      const random = messages[Math.floor(Math.random() * messages.length)];
+      const msgEl = document.querySelector('.card-message');
+      msgEl.style.transform = 'scale(0)';
+      setTimeout(() => { msgEl.textContent = random; msgEl.style.transform = 'scale(1)'; }, 300);
+      createConfetti();
+    }
+
+    setTimeout(createConfetti, 1000);
+  </script>
+</body>
+</html>
